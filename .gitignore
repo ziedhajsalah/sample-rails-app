@@ -20,4 +20,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore Rubymine files
 /.idea
+
+# Ignore Spring files
+/spring/*.pid
