@@ -51,4 +51,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   test 'authenticate? should return false for a user with a nil digest' do
     assert_not @user.authenticated?('')
   end
+
+  test 'login with remembering' do
+    log_in_as(@user, remember_me: '1')
+    assert_equal cookies['remember_token'], assigns(:user).remember_digest
+  end
+
+  test 'login without remembering' do
+    log_in_as(@user, remember_me: '0')
+    assert_nil cookies['remember_token']
+  end
 end
