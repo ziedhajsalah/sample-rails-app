@@ -12,3 +12,8 @@ zied:
   name: Zied hajsalah
   email: ziedhajsalah@gmail.com
   password_digest: <%= User.digest('password') %>
+
+zizou:
+  name: zizou hajsalah
+  email: ziedhajsalah@hotmail.com
+  password_digest: <%= User.digest('password') %>

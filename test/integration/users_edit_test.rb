@@ -10,6 +10,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   test 'unsuccessful edit' do
+    log_in_as(@user)
     get edit_user_path(@user)
     assert_template 'users/edit'
 
@@ -21,18 +22,18 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_select 'div.alert'
   end
 
-  test 'successful edit' do
+  test 'successful edit with friendlt forwarding' do
     get edit_user_path(@user)
-    assert_template 'users/edit'
-
-    patch user_path(@user), params: { user: { name: 'zizou',
-                                              email: 'ziedhajsalah@hotmail.com',
+    log_in_as(@user)
+    assert_redirected_to edit_user_url(@user)
+    patch user_path(@user), params: { user: { name: 'zizouu',
+                                              email: 'ziedhajsalah@yahoo.com',
                                               password: '',
                                               password_confirmation: '' } }
     assert_not flash.empty?
     assert_redirected_to @user
     @user.reload
-    assert_equal 'zizou', @user.name
-    assert_equal 'ziedhajsalah@hotmail.com', @user.email
+    assert_equal 'zizouu', @user.name
+    assert_equal 'ziedhajsalah@yahoo.com', @user.email
   end
 end
